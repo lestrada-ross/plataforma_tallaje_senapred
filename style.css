@@ -1,0 +1,83 @@
+/* Importar la fuente corporativa: Montserrat */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800&display=swap');
+
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.header-red {
+    background-color: #E00A13;
+}
+/* Estilos base para botones de selección */
+.garment-btn, .gender-btn {
+    flex-grow: 1;
+    sm:flex-grow-0;
+    font-size: 0.875rem; /* text-sm */
+    font-weight: 600; /* font-semibold */
+    padding: 0.5rem 1rem; /* py-2 px-4 */
+    border-radius: 0.5rem; /* rounded-lg */
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+/* Estilo para botones activos (seleccionados) */
+.active-btn {
+    background-color: #E00A13; /* Azul RSG */
+    color: white;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+/* Estilo para botones inactivos */
+.inactive-btn {
+    background-color: #f3f4f6; /* gray-100 */
+    color: #374151; /* gray-700 */
+    border-color: #d1d5db; /* gray-300 */
+}
+.inactive-btn:hover {
+    background-color: #e5e7eb; /* gray-200 */
+    border-color: #9ca3af; /* gray-400 */
+}
+
+/* Estilo para el botón de envío del formulario */
+#submit-btn {
+    background-color: #E00A13; /* Naranjo RSG */
+}
+#submit-btn:hover {
+    background-color: #ff000d; /* Un naranjo un poco más oscuro */
+}
+#submit-btn:disabled {
+    background-color: #9ca3af;
+    cursor: not-allowed;
+}
+
+
+/* Estilo para la fila resaltada en las tablas */
+.highlight-row {
+    background-color: #fef3c7; /* yellow-200, un toque del color de acento */
+    transition: background-color 0.3s ease;
+}
+
+/* Animación de entrada para los inputs */
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Ocultar flechas en inputs numéricos */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
+}

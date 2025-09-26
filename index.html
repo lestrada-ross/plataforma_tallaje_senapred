@@ -3,603 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guía de Tallas Interactiva</title>
+    <title>Rossignol Chile | Plataforma Tallaje </title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Chosen Palette: Warm Neutrals -->
-    <!-- Application Structure Plan: A task-oriented, three-section SPA. 1) Intro header. 2) An interactive size calculator where users select a garment type and gender, input measurements, and get an instant size recommendation. 3) A reference section with 'How to Measure' instructions and the original static data tables for all new garments. This structure prioritizes the user's primary task (finding their size) with the calculator, making it faster and more accurate than manually reading tables, while still providing all original context. -->
-    <!-- Visualization & Content Choices: Report Info: New Sizing tables for various garments and genders -> Goal: Find user's size -> Presentation: Interactive form/calculator with dynamic selectors for garment and gender -> Interaction: User selects garment type and gender, inputs measurements, result is shown in real-time. Justification: A calculator is more direct and user-friendly than static tables, and dynamic selectors streamline the process for multiple product types. Report Info: Measurement instructions -> Goal: Explain how to measure -> Presentation: Step-by-step cards with icons. Justification: More visual and easier to scan than plain text. Library/Method: Vanilla JS for logic, Tailwind CSS for layout and icons. -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
-        .fade-in {
-            animation: fadeIn 0.5s ease-in-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .highlight-row {
-            background-color: #fef9c3;
-            transition: background-color 0.3s ease;
-        }
-        input[type="number"]::-webkit-inner-spin-button,
-        input[type="number"]::-webkit-outer-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-        input[type="number"] {
-            -moz-appearance: textfield;
-        }
-    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="./images\cropped-favicon-rossignol-300x300.png" sizes="any">
+    <link rel="icon" href="./images\cropped-favicon-rossignol-300x300.png" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="./images\cropped-favicon-rossignol-300x300.png">
+    <link rel="manifest" href="./images\cropped-favicon-rossignol-300x300.png">
 </head>
-<body class="bg-stone-50 text-stone-800">
+<body class="bg-gray-50 text-gray-800">
+
+    <header class="bg-[#E00A13] shadow-sm" id="header-red">
+        <div class="container mx-auto px-4 sm:px-6 md:px-8 py-4">
+            <img src="images\rossignol-marca-movil.png" alt="Logo de la Empresa" class="h-4"> 
+        </div>
+    </header>
 
     <div class="container mx-auto p-4 sm:p-6 md:p-8 max-w-5xl">
 
-        <header class="text-center mb-10">
-            <h1 class="text-4xl md:text-5xl font-bold text-stone-900 mb-2">¡Encuentra tu talla perfecta!</h1>
-            <p class="text-lg text-stone-600 max-w-2xl mx-auto">¿No estás seguro de qué talla elegir? No te preocupes. Usa nuestra calculadora o compara las medidas de una prenda que ya tengas con nuestras tablas.</p>
-        </header>
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-black-700 mb-3">¡Encuentra tu talla perfecta!</h1>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto">¿No estás seguro de qué talla elegir? No te preocupes.<br>Usa nuestra calculadora ingresando las medidas de una prenda que ya tengas.</p>
+        </div>
 
         <main>
-            <section id="calculator" class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-stone-200 mb-12">
-                <h2 class="text-2xl font-bold mb-1 text-stone-900">Calculadora de Talla</h2>
-                <p class="text-stone-600 mb-6">Selecciona una prenda, ingresa tus medidas en cm y te recomendaremos la mejor talla.</p>
+            <section id="how-to-measure" class="mb-12">
+                <h2 class="text-3xl font-bold text-center mb-6 text-gray-700">¿Cómo Medir tu Prenda?</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-md">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-[#E00A13] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg mr-4">1</span>
+                            <h3 class="text-xl font-semibold text-gray-800">Coloca tu prenda</h3>
+                        </div>
+                        <p class="text-gray-600">Extiende una prenda similar que te quede cómoda sobre una superficie plana y lisa. Asegúrate de que no tenga arrugas.</p>
+                    </div>
+                     <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-md">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-[#E00A13] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg mr-4">2</span>
+                            <h3 class="text-xl font-semibold text-gray-800">Mide con precisión</h3>
+                        </div>
+                        <p class="text-gray-600">Usa una cinta métrica y mide de un extremo a otro, no alrededor de tu cuerpo. A continuación te mostramos cómo hacerlo.</p>
+                    </div>
+                </div>
+            </section>
+            <section id="calculator" class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-gray-200 mb-12">
+                <h2 class="text-2xl font-bold mb-1 text-gray-700">1. Calcula tu Talla Ideal</h2>
+                <p class="text-gray-600 mb-6">Selecciona prenda, género e ingresa las medidas de una prenda similar (en cm).</p>
 
-                <div class="mb-6 space-y-4">
+                <div class="mb-6 space-y-5">
                     <div>
-                        <label for="garment-type" class="block text-sm font-medium text-stone-700 mb-2">1. Elige el tipo de prenda:</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Tipo de prenda:</label>
                         <div id="garment-selector" class="flex flex-wrap gap-2">
-                            <button data-garment="parka" class="garment-btn flex-grow sm:flex-grow-0 text-sm font-semibold py-2 px-4 rounded-lg transition-colors duration-300 bg-stone-800 text-white">Parka</button>
-                            <button data-garment="polar" class="garment-btn flex-grow sm:flex-grow-0 text-sm font-semibold py-2 px-4 rounded-lg transition-colors duration-300 bg-stone-200 text-stone-700 hover:bg-stone-300">Polar</button>
-                            <button data-garment="camisa" class="garment-btn flex-grow sm:flex-grow-0 text-sm font-semibold py-2 px-4 rounded-lg transition-colors duration-300 bg-stone-200 text-stone-700 hover:bg-stone-300">Camisa</button>
-                            <button data-garment="polera" class="garment-btn flex-grow sm:flex-grow-0 text-sm font-semibold py-2 px-4 rounded-lg transition-colors duration-300 bg-stone-200 text-stone-700 hover:bg-stone-300">Polera</button>
-                            <button data-garment="pantalon" class="garment-btn flex-grow sm:flex-grow-0 text-sm font-semibold py-2 px-4 rounded-lg transition-colors duration-300 bg-stone-200 text-stone-700 hover:bg-stone-300">Pantalón Outdoor Unisex</button>
+                            <button data-garment="parka" class="garment-btn active-btn">Parka</button>
+                            <button data-garment="polar" class="garment-btn inactive-btn">Polar</button>
+                            <button data-garment="camisa" class="garment-btn inactive-btn">Camisa</button>
+                            <button data-garment="polera" class="garment-btn inactive-btn">Polera</button>
+                            <button data-garment="pantalon" class="garment-btn inactive-btn">Pantalón Outdoor</button>
                         </div>
                     </div>
                     <div id="gender-selector-container">
-                        <label for="gender-type" class="block text-sm font-medium text-stone-700 mb-2">2. Elige el género:</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Género:</label>
                         <div id="gender-selector" class="flex flex-wrap gap-2">
-                            <button data-gender="hombre" class="gender-btn flex-grow sm:flex-grow-0 text-sm font-semibold py-2 px-4 rounded-lg transition-colors duration-300 bg-stone-800 text-white">Hombre</button>
-                            <button data-gender="mujer" class="gender-btn flex-grow sm:flex-grow-0 text-sm font-semibold py-2 px-4 rounded-lg transition-colors duration-300 bg-stone-200 text-stone-700 hover:bg-stone-300">Mujer</button>
+                            <button data-gender="hombre" class="gender-btn active-btn">Hombre</button>
+                            <button data-gender="mujer" class="gender-btn inactive-btn">Mujer</button>
                         </div>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
                     <div>
-                        <label class="block text-sm font-medium text-stone-700 mb-2">3. Ingresa las medidas de tu prenda (en cm):</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Ingresa tus medidas (en centímetros):</label>
                         <div id="measurement-inputs" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        </div>
+                            </div>
                     </div>
-                    <div class="bg-stone-100 p-4 rounded-lg">
-                        <h3 class="font-bold text-lg text-stone-800 mb-2">4. Tu talla recomendada es:</h3>
-                        <div id="result" class="text-center bg-stone-800 text-white p-4 rounded-lg">
+                    <div class="bg-gray-100 p-4 rounded-lg">
+                        <h3 class="font-bold text-lg text-gray-700 mb-2">Talla recomendada:</h3>
+                        <div id="result" class="text-center bg-[#E00A13] text-white p-4 rounded-lg">
                             <p id="recommended-size" class="text-4xl font-bold">...</p>
-                            <p id="result-message" class="text-sm text-stone-300 mt-1">Ingresa tus medidas</p>
+                            <p id="result-message" class="text-sm text-gray-300 mt-1">Ingresa tus medidas</p>
                         </div>
                     </div>
                 </div>
             </section>
-
-            <section id="how-to-measure" class="mb-12">
-                <h2 class="text-3xl font-bold text-center mb-6 text-stone-900">¿Cómo Medir tu Prenda?</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-md">
-                        <div class="flex items-center mb-3">
-                            <span class="bg-stone-800 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg mr-4">1</span>
-                            <h3 class="text-xl font-semibold text-stone-800">Coloca tu prenda</h3>
+            
+            
+            
+            <section id="registration-form" class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-gray-200 mt-12">
+                <h2 class="text-2xl font-bold mb-1 text-gray-700">2. Registra tus Tallas</h2>
+                <p class="text-gray-600 mb-6">Ingresa tus datos y las tallas que seleccionaste para que podamos gestionar tu vestuario.</p>
+            
+                <form id="tallas-form">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label for="rut" class="block text-sm font-medium text-gray-700">RUT (con guion y puntos)</label>
+                            <input type="text" id="rut" name="RUT" placeholder="12.345.678-9" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-sm shadow-sm focus:outline-none focus:ring-1 focus:ring-blue-500">
+                            <p id="user-feedback" class="text-sm text-blue-600 mt-1 h-4"></p>
                         </div>
-                        <p class="text-stone-600">Extiende una prenda similar que te quede cómoda sobre una superficie plana y lisa. Asegúrate de que no tenga arrugas.</p>
-                    </div>
-                     <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-md">
-                        <div class="flex items-center mb-3">
-                            <span class="bg-stone-800 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg mr-4">2</span>
-                            <h3 class="text-xl font-semibold text-stone-800">Mide con precisión</h3>
-                        </div>
-                        <p class="text-stone-600">Usa una cinta métrica y mide de un extremo a otro, no alrededor de tu cuerpo. A continuación te mostramos cómo hacerlo.</p>
-                    </div>
-                </div>
-                 <div class="mt-6 bg-white p-6 rounded-xl border border-stone-200 shadow-md">
-                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4 text-center text-sm">
-                        <div class="p-2"><span class="font-bold block">📏 Largo:</span> Del hombro al dobladillo.</div>
-                        <div class="p-2"><span class="font-bold block">📏 Ancho de Pecho:</span> Debajo de las axilas.</div>
-                        <div class="p-2"><span class="font-bold block">📏 Ancho de Cintura:</span> Parte más estrecha.</div>
-                        <div class="p-2"><span class="font-bold block">📏 Largo de Manga:</span> Del hombro al final.</div>
-                        <div class="p-2"><span class="font-bold block">📏 Largo de Pierna:</span> De la entrepierna al dobladillo.</div>
-                        <div class="p-2"><span class="font-bold block">📏 Ancho de Cadera:</span> Parte más ancha.</div>
-                        <div class="p-2"><span class="font-bold block">📏 Ancho de Muslo:</span> Debajo de la entrepierna.</div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="size-charts">
-                <h2 class="text-3xl font-bold text-center mb-8 text-stone-900">Nuestras Tablas de Tallas</h2>
-                <div class="space-y-10">
-                    <div id="table-parka-mujer">
-                        <h3 class="text-xl font-bold mb-4">Parka - Mujer</h3>
-                        <div class="overflow-x-auto bg-white rounded-lg shadow-md border border-stone-200">
-                           <table class="w-full text-sm text-left text-stone-600">
-                               <thead class="text-xs text-stone-700 uppercase bg-stone-100">
-                                   <tr>
-                                       <th scope="col" class="px-6 py-3">Talla</th>
-                                       <th scope="col" class="px-6 py-3">1/2 Contorno Pecho</th>
-                                       <th scope="col" class="px-6 py-3">1/2 Contorno Cintura</th>
-                                       <th scope="col" class="px-6 py-3">1/2 Contorno Cadera</th>
-                                       <th scope="col" class="px-6 py-3">Largo Total</th>
-                                       <th scope="col" class="px-6 py-3">Largo de Mangas</th>
-                                   </tr>
-                               </thead>
-                               <tbody></tbody>
-                           </table>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
+                            <input type="email" id="email" name="Email" placeholder="tu.correo@empresa.com" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-sm shadow-sm focus:outline-none focus:ring-1 focus:ring-blue-500">
                         </div>
                     </div>
-                    <div id="table-parka-hombre">
-                        <h3 class="text-xl font-bold mb-4">Parka - Hombre</h3>
-                        <div class="overflow-x-auto bg-white rounded-lg shadow-md border border-stone-200">
-                           <table class="w-full text-sm text-left text-stone-600">
-                               <thead class="text-xs text-stone-700 uppercase bg-stone-100">
-                                   <tr>
-                                       <th scope="col" class="px-6 py-3">Talla</th>
-                                       <th scope="col" class="px-6 py-3">1/2 Contorno Pecho</th>
-                                       <th scope="col" class="px-6 py-3">1/2 Contorno Cadera</th>
-                                       <th scope="col" class="px-6 py-3">Largo Total</th>
-                                       <th scope="col" class="px-6 py-3">Largo de Mangas</th>
-                                   </tr>
-                               </thead>
-                               <tbody></tbody>
-                           </table>
+            
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 mb-6">
+                        <div>
+                            <label for="talla-parka" class="block text-sm font-medium text-gray-700">Parka</label>
+                            <select id="talla-parka" name="Parka" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-sm shadow-sm focus:outline-none focus:ring-1 focus:ring-blue-500">
+                                <option value="">Elige...</option>
+                                <option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option><option>3XL</option><option>4XL</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="talla-polar" class="block text-sm font-medium text-gray-700">Polar</option>
+                            <select id="talla-polar" name="Polar" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-sm shadow-sm focus:outline-none focus:ring-1 focus:ring-blue-500">
+                                <option value="">Elige...</option>
+                                <option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option><option>3XL</option><option>4XL</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="talla-camisa" class="block text-sm font-medium text-gray-700">Camisa/Blusa</option>
+                            <select id="talla-camisa" name="Camisa" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-sm shadow-sm focus:outline-none focus:ring-1 focus:ring-blue-500">
+                                <option value="">Elige...</option>
+                                <option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option><option>3XL</option><option>4XL</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="talla-polera" class="block text-sm font-medium text-gray-700">Polera</option>
+                            <select id="talla-polera" name="Polera" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-sm shadow-sm focus:outline-none focus:ring-1 focus:ring-blue-500">
+                                <option value="">Elige...</option>
+                                <option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option><option>3XL</option><option>4XL</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="talla-pantalon" class="block text-sm font-medium text-gray-700">Pantalón</option>
+                            <select id="talla-pantalon" name="Pantalon" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-sm shadow-sm focus:outline-none focus:ring-1 focus:ring-blue-500">
+                                <option value="">Elige...</option>
+                                <option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option><option>3XL</option><option>4XL</option>
+                            </select>
                         </div>
                     </div>
-                    <div id="table-polar-hombre">
-                        <h3 class="text-xl font-bold mb-4">Polar Enzo - Hombre</h3>
-                        <div class="overflow-x-auto bg-white rounded-lg shadow-md border border-stone-200">
-                           <table class="w-full text-sm text-left text-stone-600">
-                               <thead class="text-xs text-stone-700 uppercase bg-stone-100">
-                                   <tr>
-                                       <th scope="col" class="px-6 py-3">Talla</th>
-                                       <th scope="col" class="px-6 py-3">1/2 Contorno de Pecho</th>
-                                       <th scope="col" class="px-6 py-3">1/2 Contorno de Cintura</th>
-                                       <th scope="col" class="px-6 py-3">1/2 Contorno de Cadera</th>
-                                       <th scope="col" class="px-6 py-3">Largo de Mangas</th>
-                                   </tr>
-                               </thead>
-                               <tbody></tbody>
-                           </table>
-                        </div>
+            
+                    <div class="flex items-center justify-end gap-4">
+                        <p id="submit-feedback" class="text-sm text-green-600 font-semibold h-4"></p>
+                        <button type="submit" id="submit-btn" class="text-white font-bold py-2 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 transition-all duration-300 disabled:opacity-50">
+                            Registrar Mis Tallas
+                        </button>
                     </div>
-                    <div id="table-polar-mujer">
-                        <h3 class="text-xl font-bold mb-4">Polar Enzo - Mujer</h3>
-                        <div class="overflow-x-auto bg-white rounded-lg shadow-md border border-stone-200">
-                           <table class="w-full text-sm text-left text-stone-600">
-                               <thead class="text-xs text-stone-700 uppercase bg-stone-100">
-                                   <tr>
-                                       <th scope="col" class="px-6 py-3">Talla</th>
-                                       <th scope="col" class="px-6 py-3">1/2 Contorno de Pecho</th>
-                                       <th scope="col" class="px-6 py-3">1/2 Contorno de Cintura</th>
-                                       <th scope="col" class="px-6 py-3">1/2 Contorno de Cadera</th>
-                                       <th scope="col" class="px-6 py-3">Largo de Mangas</th>
-                                   </tr>
-                               </thead>
-                               <tbody></tbody>
-                           </table>
-                        </div>
-                    </div>
-                    <div id="table-camisa-hombre">
-                        <h3 class="text-xl font-bold mb-4">Camisa Outdoor - Hombre</h3>
-                        <div class="overflow-x-auto bg-white rounded-lg shadow-md border border-stone-200">
-                           <table class="w-full text-sm text-left text-stone-600">
-                               <thead class="text-xs text-stone-700 uppercase bg-stone-100">
-                                   <tr>
-                                       <th scope="col" class="px-6 py-3">Talla</th>
-                                       <th scope="col" class="px-6 py-3">1/2 Contorno de Pecho</th>
-                                       <th scope="col" class="px-6 py-3">1/2 Contorno de Cadera</th>
-                                       <th scope="col" class="px-6 py-3">Largo Total</th>
-                                       <th scope="col" class="px-6 py-3">Ancho de Espalda</th>
-                                       <th scope="col" class="px-6 py-3">Largo de Manga</th>
-                                   </tr>
-                               </thead>
-                               <tbody></tbody>
-                           </table>
-                        </div>
-                    </div>
-                     <div id="table-camisa-mujer">
-                        <h3 class="text-xl font-bold mb-4">Blusa Outdoor - Mujer</h3>
-                        <div class="overflow-x-auto bg-white rounded-lg shadow-md border border-stone-200">
-                           <table class="w-full text-sm text-left text-stone-600">
-                               <thead class="text-xs text-stone-700 uppercase bg-stone-100">
-                                   <tr>
-                                       <th scope="col" class="px-6 py-3">Talla</th>
-                                       <th scope="col" class="px-6 py-3">1/2 Contorno de Pecho</th>
-                                       <th scope="col" class="px-6 py-3">1/2 Contorno de Cintura</th>
-                                       <th scope="col" class="px-6 py-3">1/2 Contorno de Cadera</th>
-                                       <th scope="col" class="px-6 py-3">Largo Total</th>
-                                       <th scope="col" class="px-6 py-3">Ancho de Espalda</th>
-                                       <th scope="col" class="px-6 py-3">Largo de Manga</th>
-                                   </tr>
-                               </thead>
-                               <tbody></tbody>
-                           </table>
-                        </div>
-                    </div>
-                    <div id="table-polera-hombre">
-                        <h3 class="text-xl font-bold mb-4">Polera Piqué - Hombre</h3>
-                        <div class="overflow-x-auto bg-white rounded-lg shadow-md border border-stone-200">
-                           <table class="w-full text-sm text-left text-stone-600">
-                               <thead class="text-xs text-stone-700 uppercase bg-stone-100">
-                                   <tr>
-                                       <th scope="col" class="px-6 py-3">Talla</th>
-                                       <th scope="col" class="px-6 py-3">Contorno de Pecho</th>
-                                       <th scope="col" class="px-6 py-3">Contorno de Cadera</th>
-                                       <th scope="col" class="px-6 py-3">Largo Total</th>
-                                       <th scope="col" class="px-6 py-3">Largo de Manga</th>
-                                   </tr>
-                               </thead>
-                               <tbody></tbody>
-                           </table>
-                        </div>
-                    </div>
-                    <div id="table-polera-mujer">
-                        <h3 class="text-xl font-bold mb-4">Polera Piqué - Mujer</h3>
-                        <div class="overflow-x-auto bg-white rounded-lg shadow-md border border-stone-200">
-                           <table class="w-full text-sm text-left text-stone-600">
-                               <thead class="text-xs text-stone-700 uppercase bg-stone-100">
-                                   <tr>
-                                       <th scope="col" class="px-6 py-3">Talla</th>
-                                       <th scope="col" class="px-6 py-3">Contorno de Pecho</th>
-                                       <th scope="col" class="px-6 py-3">Contorno de Cintura</th>
-                                       <th scope="col" class="px-6 py-3">Contorno de Cadera</th>
-                                       <th scope="col" class="px-6 py-3">Largo Total</th>
-                                       <th scope="col" class="px-6 py-3">Largo de Manga</th>
-                                   </tr>
-                               </thead>
-                               <tbody></tbody>
-                           </table>
-                        </div>
-                    </div>
-                    <div id="table-pantalon-unisex">
-                        <h3 class="text-xl font-bold mb-4">Pantalón Outdoor - Unisex</h3>
-                        <div class="overflow-x-auto bg-white rounded-lg shadow-md border border-stone-200">
-                           <table class="w-full text-sm text-left text-stone-600">
-                               <thead class="text-xs text-stone-700 uppercase bg-stone-100">
-                                   <tr>
-                                       <th scope="col" class="px-6 py-3">Talla</th>
-                                       <th scope="col" class="px-6 py-3">1/2 Contorno de Cintura</th>
-                                       <th scope="col" class="px-6 py-3">1/2 Contorno de Cadera</th>
-                                       <th scope="col" class="px-6 py-3">Largo Total sin Pretina</th>
-                                       <th scope="col" class="px-6 py-3">Alto de Pretina</th>
-                                   </tr>
-                               </thead>
-                               <tbody></tbody>
-                           </table>
-                        </div>
-                    </div>
-                </div>
+                </form>
             </section>
         </main>
     </div>
 
-    <script>
-        const sizeData = {
-            'parka-mujer': {
-                measurements: ['contornoPecho', 'contornoCintura', 'contornoCadera', 'largoTotal', 'largoMangas'],
-                data: [
-                    { talla: 'XS', contornoPecho: 51 * 2, contornoCintura: 49 * 2, contornoCadera: 52 * 2, largoTotal: 65, largoMangas: 57 },
-                    { talla: 'S', contornoPecho: 53 * 2, contornoCintura: 51 * 2, contornoCadera: 54 * 2, largoTotal: 67, largoMangas: 59 },
-                    { talla: 'M', contornoPecho: 55 * 2, contornoCintura: 53 * 2, contornoCadera: 56 * 2, largoTotal: 69, largoMangas: 61 },
-                    { talla: 'L', contornoPecho: 57 * 2, contornoCintura: 55 * 2, contornoCadera: 58 * 2, largoTotal: 71, largoMangas: 62 },
-                    { talla: 'XL', contornoPecho: 59 * 2, contornoCintura: 57 * 2, contornoCadera: 60 * 2, largoTotal: 72.5, largoMangas: 63 },
-                    { talla: '2XL', contornoPecho: 61 * 2, contornoCintura: 59 * 2, contornoCadera: 62 * 2, largoTotal: 74, largoMangas: 64 },
-                    { talla: '3XL', contornoPecho: 63 * 2, contornoCintura: 61 * 2, contornoCadera: 64 * 2, largoTotal: 75.5, largoMangas: 65 },
-                    { talla: '4XL', contornoPecho: 65 * 2, contornoCintura: 63 * 2, contornoCadera: 66 * 2, largoTotal: 77, largoMangas: 66 }
-                ]
-            },
-            'parka-hombre': {
-                measurements: ['contornoPecho', 'contornoCadera', 'largoTotal', 'largoMangas'],
-                data: [
-                    { talla: 'S', contornoPecho: 60 * 2, contornoCadera: 59 * 2, largoTotal: 75, largoMangas: 69 },
-                    { talla: 'M', contornoPecho: 62 * 2, contornoCadera: 61 * 2, largoTotal: 77, largoMangas: 70 },
-                    { talla: 'L', contornoPecho: 64 * 2, contornoCadera: 63 * 2, largoTotal: 79, largoMangas: 71 },
-                    { talla: 'XL', contornoPecho: 66 * 2, contornoCadera: 65 * 2, largoTotal: 80.5, largoMangas: 72 },
-                    { talla: '2XL', contornoPecho: 68 * 2, contornoCadera: 67 * 2, largoTotal: 82, largoMangas: 73 },
-                    { talla: '3XL', contornoPecho: 70 * 2, contornoCadera: 69 * 2, largoTotal: 83.5, largoMangas: 74 },
-                    { talla: '4XL', contornoPecho: 72 * 2, contornoCadera: 71 * 2, largoTotal: 85, largoMangas: 75 }
-                ]
-            },
-            'polar-hombre': {
-                measurements: ['contornoPecho', 'contornoCintura', 'contornoCadera', 'largoMangas'],
-                data: [
-                    { talla: 'S', contornoPecho: 55 * 2, contornoCintura: 53 * 2, contornoCadera: 53 * 2, largoMangas: 62 },
-                    { talla: 'M', contornoPecho: 57 * 2, contornoCintura: 55 * 2, contornoCadera: 55 * 2, largoMangas: 64 },
-                    { talla: 'L', contornoPecho: 59 * 2, contornoCintura: 57 * 2, contornoCadera: 57 * 2, largoMangas: 66 },
-                    { talla: 'XL', contornoPecho: 61 * 2, contornoCintura: 59 * 2, contornoCadera: 59 * 2, largoMangas: 68 },
-                    { talla: 'XXL', contornoPecho: 63 * 2, contornoCintura: 61 * 2, contornoCadera: 61 * 2, largoMangas: 70 },
-                    { talla: '3XL', contornoPecho: 65 * 2, contornoCintura: 63 * 2, contornoCadera: 63 * 2, largoMangas: 72 },
-                    { talla: '4XL', contornoPecho: 67 * 2, contornoCintura: 65 * 2, contornoCadera: 65 * 2, largoMangas: 74 }
-                ]
-            },
-            'polar-mujer': {
-                measurements: ['contornoPecho', 'contornoCintura', 'contornoCadera', 'largoMangasCuello'],
-                data: [
-                    { talla: 'XS', contornoPecho: 47 * 2, contornoCintura: 44 * 2, contornoCadera: 48 * 2, largoMangasCuello: 69 },
-                    { talla: 'S', contornoPecho: 49.5 * 2, contornoCintura: 46.5 * 2, contornoCadera: 50.5 * 2, largoMangasCuello: 71 },
-                    { talla: 'M', contornoPecho: 52 * 2, contornoCintura: 48 * 2, contornoCadera: 53 * 2, largoMangasCuello: 73 },
-                    { talla: 'L', contornoPecho: 54.5 * 2, contornoCintura: 51.5 * 2, contornoCadera: 55.5 * 2, largoMangasCuello: 75 },
-                    { talla: 'XL', contornoPecho: 57 * 2, contornoCintura: 54 * 2, contornoCadera: 58 * 2, largoMangasCuello: 77 },
-                    { talla: '2XL', contornoPecho: 59.5 * 2, contornoCintura: 56.5 * 2, contornoCadera: 60.5 * 2, largoMangasCuello: 79 },
-                    { talla: '3XL', contornoPecho: 62 * 2, contornoCintura: 59 * 2, contornoCadera: 63 * 2, largoMangasCuello: 81 },
-                    { talla: '4XL', contornoPecho: 64 * 2, contornoCintura: 61.5 * 2, contornoCadera: 65.5 * 2, largoMangasCuello: 83 }
-                ]
-            },
-            'camisa-hombre': {
-                measurements: ['contornoPecho', 'contornoCadera', 'largoTotal', 'anchoEspalda', 'largoManga'],
-                data: [
-                    { talla: 'S', contornoPecho: 56 * 2, contornoCadera: 56 * 2, largoTotal: 74, anchoEspalda: 47, largoManga: 63 },
-                    { talla: 'M', contornoPecho: 58 * 2, contornoCadera: 58 * 2, largoTotal: 76, anchoEspalda: 48.5, largoManga: 64 },
-                    { talla: 'L', contornoPecho: 60 * 2, contornoCadera: 60 * 2, largoTotal: 78, anchoEspalda: 50, largoManga: 65 },
-                    { talla: 'XL', contornoPecho: 62 * 2, contornoCadera: 62 * 2, largoTotal: 80, anchoEspalda: 51.5, largoManga: 66 },
-                    { talla: 'XXL', contornoPecho: 64 * 2, contornoCadera: 64 * 2, largoTotal: 82, anchoEspalda: 53, largoManga: 67 },
-                    { talla: 'XXXL', contornoPecho: 66 * 2, contornoCadera: 66 * 2, largoTotal: 84, anchoEspalda: 48, largoManga: 68 },
-                    { talla: '4XL', contornoPecho: 68 * 2, contornoCadera: 68 * 2, largoTotal: 86, anchoEspalda: 50, largoManga: 70 }
-                ]
-            },
-            'camisa-mujer': {
-                measurements: ['contornoPecho', 'contornoCintura', 'contornoCadera', 'largoTotal', 'anchoEspalda', 'largoManga'],
-                data: [
-                    { talla: 'XS', contornoPecho: 46 * 2, contornoCintura: 41 * 2, contornoCadera: 48 * 2, largoTotal: 61, anchoEspalda: 38, largoManga: 59.5 },
-                    { talla: 'S', contornoPecho: 48 * 2, contornoCintura: 43 * 2, contornoCadera: 50 * 2, largoTotal: 63, anchoEspalda: 39.5, largoManga: 60.5 },
-                    { talla: 'M', contornoPecho: 50 * 2, contornoCintura: 45 * 2, contornoCadera: 52 * 2, largoTotal: 65, anchoEspalda: 41, largoManga: 61.5 },
-                    { talla: 'L', contornoPecho: 52 * 2, contornoCintura: 47 * 2, contornoCadera: 54 * 2, largoTotal: 67, anchoEspalda: 42.5, largoManga: 62.5 },
-                    { talla: 'XL', contornoPecho: 54 * 2, contornoCintura: 49 * 2, contornoCadera: 56 * 2, largoTotal: 69, anchoEspalda: 44, largoManga: 63.5 },
-                    { talla: 'XXL', contornoPecho: 56 * 2, contornoCintura: 51 * 2, contornoCadera: 58 * 2, largoTotal: 71, anchoEspalda: 45.5, largoManga: 64.5 },
-                    { talla: 'XXXL', contornoPecho: 58 * 2, contornoCintura: 53 * 2, contornoCadera: 60 * 2, largoTotal: 73, anchoEspalda: 47, largoManga: 65.5 },
-                    { talla: '4XL', contornoPecho: 60 * 2, contornoCintura: 55 * 2, contornoCadera: 62 * 2, largoTotal: 75, anchoEspalda: 48.5, largoManga: 66.5 }
-                ]
-            },
-            'polera-hombre': {
-                measurements: ['contornoPecho', 'contornoCadera', 'largoTotalEspalda', 'largoManga'],
-                data: [
-                    { talla: 'S', contornoPecho: 108, contornoCadera: 108, largoTotalEspalda: 75, largoManga: 63 },
-                    { talla: 'M', contornoPecho: 113, contornoCadera: 113, largoTotalEspalda: 77.5, largoManga: 64.5 },
-                    { talla: 'L', contornoPecho: 118, contornoCadera: 118, largoTotalEspalda: 78.5, largoManga: 66 },
-                    { talla: 'XL', contornoPecho: 124, contornoCadera: 124, largoTotalEspalda: 82, largoManga: 67.5 },
-                    { talla: 'XXL', contornoPecho: 130, contornoCadera: 130, largoTotalEspalda: 85.5, largoManga: 69 },
-                    { talla: 'XXXL', contornoPecho: 134, contornoCadera: 134, largoTotalEspalda: 88, largoManga: 70 },
-                    { talla: '4XL', contornoPecho: 138, contornoCadera: 138, largoTotalEspalda: 90, largoManga: 71 }
-                ]
-            },
-            'polera-mujer': {
-                measurements: ['contornoPecho', 'contornoCintura', 'contornoCadera', 'largoTotalEspalda', 'largoManga'],
-                data: [
-                    { talla: 'XS', contornoPecho: 95, contornoCintura: 85, contornoCadera: 103, largoTotalEspalda: 61, largoManga: 59.5 },
-                    { talla: 'S', contornoPecho: 101, contornoCintura: 91, contornoCadera: 109, largoTotalEspalda: 63, largoManga: 60.5 },
-                    { talla: 'M', contornoPecho: 107, contornoCintura: 97, contornoCadera: 111, largoTotalEspalda: 65, largoManga: 61.5 },
-                    { talla: 'L', contornoPecho: 113, contornoCintura: 103, contornoCadera: 121, largoTotalEspalda: 67, largoManga: 62.5 },
-                    { talla: 'XL', contornoPecho: 116, contornoCintura: 106, contornoCadera: 124, largoTotalEspalda: 69, largoManga: 62.5 },
-                    { talla: '2XL', contornoPecho: 120, contornoCintura: 110, contornoCadera: 128, largoTotalEspalda: 71, largoManga: 63.5 },
-                    { talla: '3XL', contornoPecho: 124, contornoCintura: 114, contornoCadera: 132, largoTotalEspalda: 73, largoManga: 63.5 },
-                    { talla: '4XL', contornoPecho: 128, contornoCintura: 118, contornoCadera: 136, largoTotalEspalda: 75, largoManga: 63.5 }
-                ]
-            },
-            'pantalon-unisex': {
-                measurements: ['contornoCintura', 'contornoCadera', 'largoTotal'],
-                data: [
-                    { talla: 'XS', contornoCintura: 38 * 2, contornoCadera: 48 * 2, largoTotal: 98, altoPretina: 4 },
-                    { talla: 'S', contornoCintura: 40 * 2, contornoCadera: 51 * 2, largoTotal: 99, altoPretina: 4 },
-                    { talla: 'M', contornoCintura: 42 * 2, contornoCadera: 54 * 2, largoTotal: 100, altoPretina: 4 },
-                    { talla: 'L', contornoCintura: 44 * 2, contornoCadera: 57 * 2, largoTotal: 101, altoPretina: 4 },
-                    { talla: 'XL', contornoCintura: 46 * 2, contornoCadera: 60 * 2, largoTotal: 102, altoPretina: 4 },
-                    { talla: '2XL', contornoCintura: 48 * 2, contornoCadera: 63 * 2, largoTotal: 103, altoPretina: 4 },
-                    { talla: '3XL', contornoCintura: 50 * 2, contornoCadera: 66 * 2, largoTotal: 104, altoPretina: 4 },
-                    { talla: '4XL', contornoCintura: 52 * 2, contornoCadera: 69 * 2, largoTotal: 105, altoPretina: 4 }
-                ]
-            }
-        };
-
-        const measurementLabels = {
-            contornoPecho: 'Contorno de Pecho',
-            contornoCintura: 'Contorno de Cintura',
-            contornoCadera: 'Contorno de Cadera',
-            largoTotal: 'Largo Total',
-            largoMangas: 'Largo de Mangas',
-            largoMangasCuello: 'Largo de Manga (desde cuello)',
-            anchoEspalda: 'Ancho de Espalda',
-            largoManga: 'Largo de Manga',
-            largoTotalEspalda: 'Largo Total de Espalda',
-        };
-
-        let currentGarment = 'parka';
-        let currentGender = 'hombre';
-
-        const garmentSelector = document.getElementById('garment-selector');
-        const genderSelectorContainer = document.getElementById('gender-selector-container');
-        const genderSelector = document.getElementById('gender-selector');
-        const measurementInputsContainer = document.getElementById('measurement-inputs');
-        const recommendedSizeEl = document.getElementById('recommended-size');
-        const resultMessageEl = document.getElementById('result-message');
-
-        function populateTables() {
-            for (const key in sizeData) {
-                const parts = key.split('-');
-                const garment = parts[0];
-                const gender = parts[1] || 'unisex';
-                const tableBody = document.querySelector(`#table-${garment}-${gender} tbody`);
-                if (!tableBody) continue;
-
-                tableBody.innerHTML = '';
-                sizeData[key].data.forEach(rowData => {
-                    const row = document.createElement('tr');
-                    row.className = 'bg-white border-b';
-                    row.dataset.talla = rowData.talla;
-                    
-                    const keys = Object.keys(rowData);
-                    keys.forEach(prop => {
-                        const cell = document.createElement('td');
-                        cell.className = 'px-6 py-4';
-                         if(prop === 'talla') {
-                            cell.className += ' font-medium text-stone-900 whitespace-nowrap';
-                            cell.setAttribute('scope', 'row');
-                        }
-                        cell.textContent = rowData[prop];
-                        row.appendChild(cell);
-                    });
-                    tableBody.appendChild(row);
-                });
-            }
-        }
-
-        function createInputFields() {
-            measurementInputsContainer.innerHTML = '';
-            let key = currentGarment;
-            if (currentGender) {
-                key += `-${currentGender}`;
-            } else if (currentGarment === 'pantalon') {
-                key = 'pantalon-unisex';
-            }
-            const measurements = sizeData[key].measurements;
-            
-            measurements.forEach(m => {
-                const div = document.createElement('div');
-                div.className = "fade-in";
-                const label = document.createElement('label');
-                label.htmlFor = `input-${m}`;
-                label.className = 'block text-sm font-medium text-stone-600 mb-1';
-                label.textContent = measurementLabels[m];
-
-                const input = document.createElement('input');
-                input.type = 'number';
-                input.id = `input-${m}`;
-                input.dataset.measure = m;
-                input.placeholder = 'ej: ' + (sizeData[key].data[0][m] / (m.includes('contorno') && key !== 'polera-hombre' && key !== 'polera-mujer' ? 2 : 1));
-                input.className = 'mt-1 block w-full px-3 py-2 bg-white border border-stone-300 rounded-md text-sm shadow-sm placeholder-stone-400 focus:outline-none focus:ring-1 focus:ring-stone-500 focus:border-stone-500';
-                input.addEventListener('input', calculateSize);
-                
-                div.appendChild(label);
-                div.appendChild(input);
-                measurementInputsContainer.appendChild(div);
-            });
-        }
-        
-        function calculateSize() {
-            const inputs = measurementInputsContainer.querySelectorAll('input');
-            const userMeasurements = {};
-            let hasInput = false;
-
-            inputs.forEach(input => {
-                if (input.value) {
-                    userMeasurements[input.dataset.measure] = parseFloat(input.value);
-                    hasInput = true;
-                }
-            });
-
-            document.querySelectorAll('tbody tr').forEach(row => row.classList.remove('highlight-row'));
-
-            if (!hasInput) {
-                recommendedSizeEl.textContent = '...';
-                resultMessageEl.textContent = 'Ingresa tus medidas';
-                return;
-            }
-
-            let key = currentGarment;
-            if (currentGender) {
-                key += `-${currentGender}`;
-            } else if (currentGarment === 'pantalon') {
-                key = 'pantalon-unisex';
-            }
-            const garmentInfo = sizeData[key];
-            let bestMatch = null;
-            let minDifference = Infinity;
-
-            garmentInfo.data.forEach(sizeProfile => {
-                let totalDifference = 0;
-                let isViable = true;
-
-                garmentInfo.measurements.forEach(m => {
-                    if (userMeasurements[m]) {
-                        const profileValue = sizeProfile[m];
-                        const userValue = userMeasurements[m];
-                        
-                        if (userValue > profileValue + 2) { 
-                            isViable = false;
-                        }
-                        totalDifference += Math.abs(profileValue - userValue);
-                    }
-                });
-
-                if (isViable && totalDifference < minDifference) {
-                    minDifference = totalDifference;
-                    bestMatch = sizeProfile;
-                }
-            });
-            
-            if (bestMatch) {
-                recommendedSizeEl.textContent = bestMatch.talla;
-                resultMessageEl.textContent = 'Basado en el ajuste más cercano.';
-                const highlightedRow = document.querySelector(`#table-${key} tr[data-talla="${bestMatch.talla}"]`);
-                if (highlightedRow) {
-                    highlightedRow.classList.add('highlight-row');
-                }
-            } else {
-                recommendedSizeEl.textContent = '¿Fuera de rango?';
-                resultMessageEl.textContent = 'Tus medidas superan nuestra talla más grande.';
-            }
-        }
-
-        function switchGarment(garment) {
-            currentGarment = garment;
-            
-            document.querySelectorAll('.garment-btn').forEach(btn => {
-                btn.classList.remove('bg-stone-800', 'text-white');
-                btn.classList.add('bg-stone-200', 'text-stone-700', 'hover:bg-stone-300');
-            });
-            document.querySelector(`.garment-btn[data-garment="${garment}"]`).classList.add('bg-stone-800', 'text-white');
-
-            const hasGender = ['parka', 'polar', 'camisa', 'polera'].includes(garment);
-            genderSelectorContainer.style.display = hasGender ? 'block' : 'none';
-            if (!hasGender) {
-                currentGender = 'unisex';
-            } else {
-                currentGender = document.querySelector('.gender-btn.bg-stone-800').dataset.gender;
-            }
-
-            createInputFields();
-            calculateSize();
-        }
-
-        function switchGender(gender) {
-            currentGender = gender;
-            
-            document.querySelectorAll('.gender-btn').forEach(btn => {
-                btn.classList.remove('bg-stone-800', 'text-white');
-                btn.classList.add('bg-stone-200', 'text-stone-700', 'hover:bg-stone-300');
-            });
-            document.querySelector(`.gender-btn[data-gender="${gender}"]`).classList.add('bg-stone-800', 'text-white');
-
-            createInputFields();
-            calculateSize();
-        }
-
-        garmentSelector.addEventListener('click', (e) => {
-            if (e.target.matches('.garment-btn')) {
-                switchGarment(e.target.dataset.garment);
-            }
-        });
-        
-        genderSelector.addEventListener('click', (e) => {
-            if (e.target.matches('.gender-btn')) {
-                switchGender(e.target.dataset.gender);
-            }
-        });
-
-        document.addEventListener('DOMContentLoaded', () => {
-            populateTables();
-            switchGarment('parka');
-            switchGender('hombre');
-        });
-    </script>
+    <script src="script.js"></script>
 
 </body>
 </html>
