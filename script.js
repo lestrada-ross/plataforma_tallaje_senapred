@@ -311,46 +311,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // FORMULARIO
 
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwNZZqw5TnIo-mEaD5nJbudDauhJewn0xrQeOtGNqATsWdI99Sr9qmI1SSu3X7rQqLM3w/exec'; 
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwwy4_T76cjtxy-9IKZtiD3VHPnxjTNbRelU1n6lCek1p53xNJDcvEUUTQhVFwfCnxXZg/exec'; 
 
     const tallasForm = document.getElementById('tallas-form');
-    const rutInput = document.getElementById('rut');
     const submitBtn = document.getElementById('submit-btn');
-    const userFeedback = document.getElementById('user-feedback');
     const submitFeedback = document.getElementById('submit-feedback');
-
-    rutInput.addEventListener('blur', async () => {
-        const rut = rutInput.value.trim();
-        if (rut.length < 9) return; 
-
-        userFeedback.textContent = 'Buscando tu registro...';
-        submitBtn.disabled = true;
-        
-        try {
-            const response = await fetch(`${SCRIPT_URL}?rut=${encodeURIComponent(rut)}`);
-            const result = await response.json();
-
-            if (result.status === 'success') {
-                const userData = result.data;
-                userFeedback.textContent = '¡Hola de nuevo! Encontramos tu registro.';
-                document.getElementById('email').value = userData.Email || '';
-                document.getElementById('talla-parka').value = userData.Parka || '';
-                document.getElementById('talla-polar').value = userData.Polar || '';
-                document.getElementById('talla-camisa').value = userData.Camisa || '';
-                document.getElementById('talla-polera').value = userData.Polera || '';
-                document.getElementById('talla-pantalon').value = userData.Pantalon || '';
-                submitBtn.textContent = 'Actualizar Mis Tallas';
-            } else {
-                userFeedback.textContent = 'Parece que eres un usuario nuevo.';
-                submitBtn.textContent = 'Registrar Mis Tallas';
-            }
-        } catch (error) {
-            console.error('Error al buscar usuario:', error);
-            userFeedback.textContent = 'No se pudo verificar el RUT.';
-        } finally {
-            submitBtn.disabled = false;
-        }
-    });
 
     tallasForm.addEventListener('submit', async (e) => {
         e.preventDefault(); 
@@ -363,32 +328,31 @@ document.addEventListener('DOMContentLoaded', () => {
         const data = Object.fromEntries(formData.entries());
 
         try {
-            const response = await fetch(SCRIPT_URL, {
+            // Usamos 'no-cors' para un envío de "disparar y olvidar" a Google Scripts
+            await fetch(SCRIPT_URL, {
                 method: 'POST',
-                mode: 'no-cors', // Cambiado a 'no-cors' para Google Scripts
+                mode: 'no-cors', 
                 headers: { 'Content-Type': 'application/json' },
+                redirect: 'follow',
                 body: JSON.stringify(data)
             });
-
-            // Con no-cors, no podemos leer la respuesta, así que asumimos éxito.
-            const action = submitBtn.textContent.includes('Actualizar') ? 'actualizadas' : 'registradas';
-            submitFeedback.textContent = `¡Tallas ${action} con éxito!`;
             
+            // Como 'no-cors' no nos permite leer la respuesta, asumimos que todo salió bien.
+            submitFeedback.textContent = '¡Tallas registradas con éxito!';
+            
+            // Reseteamos el formulario después de un momento
             setTimeout(() => {
                 tallasForm.reset();
-                userFeedback.textContent = '';
-                submitBtn.textContent = 'Registrar Mis Tallas';
                 submitFeedback.textContent = '';
+                submitBtn.textContent = 'Enviar Mis Tallas';
+                submitBtn.disabled = false;
             }, 3000);
 
         } catch (error) {
             console.error('Error al enviar formulario:', error);
             submitFeedback.textContent = 'Hubo un error. Intenta de nuevo.';
-        } finally {
-            // El botón se reactivará después del reseteo del formulario
-            setTimeout(() => {
-                 submitBtn.disabled = false;
-            }, 3000);
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Enviar Mis Tallas';
         }
     });
 });
